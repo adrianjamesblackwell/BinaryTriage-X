@@ -1,97 +1,347 @@
 # BinaryTriage-X
 
-**BinaryTriage-X** is a static binary triage platform designed to reduce the time required to assess unknown PE and ELF executables.
+A professional-grade static binary triage platform designed to reduce the time required to evaluate unknown executables through fast, explainable, and reproducible analysis.
 
-The project focuses on fast, explainable, and reproducible risk assessment for malware analysts, incident responders, reverse engineers, SOC teams, and security researchers.
+BinaryTriage-X is developed as part of **Blackwell Toolworks** and is intended for malware analysts, incident responders, reverse engineers, threat intelligence teams, detection engineers, security operations centers (SOC), and security researchers.
 
-## Mission
+---
+
+# Mission
 
 Unknown binaries create operational uncertainty.
 
-BinaryTriage-X helps answer:
+BinaryTriage-X helps answer the following questions:
 
 * What is this binary?
+* What executable format does it use?
 * Is it suspicious?
 * Why is it suspicious?
-* What should an analyst investigate first?
+* What evidence supports that assessment?
+* Which indicators should an analyst investigate first?
 * How should this sample be prioritized?
 
-The platform does not claim that a file is malware.
-Instead, it provides investigation priority based on observable static indicators.
+The platform is designed to support analyst decision-making through observable evidence rather than making unsupported malware claims.
 
-## Initial Scope
+---
 
-Version 1 focuses on static analysis.
+# Design Philosophy
 
-Supported formats:
+BinaryTriage-X is built around several engineering principles.
 
-* PE
-* ELF
+* Explainability over black-box scoring.
+* Modular and maintainable architecture.
+* Security-first design.
+* Reproducible analysis.
+* Test-driven development.
+* Real-world malware workflows.
+* Analyst-centric reporting.
+* Incremental engineering.
+* Documentation-first development.
 
-Core capabilities:
+Every component is designed, documented, implemented, tested, reviewed, and integrated before the next module begins.
 
-* File metadata extraction
-* Cryptographic hashing
-* Entropy analysis
-* Import analysis
-* Section analysis
-* String extraction
-* Packer indicators
-* Suspicious indicator scoring
-* Risk and priority assessment
-* JSON reporting
-* CLI interface
+---
 
-## Design Principles
+# Project Status
 
-BinaryTriage-X is designed around the following principles:
-
-1. Safety first: samples are not executed.
-2. Explainability: every score must have a reason.
-3. Reproducibility: same input should produce the same output.
-4. Analyst usefulness: results must help prioritization.
-5. Extensibility: new rules and formats should be easy to add.
-6. Measurability: performance and detection quality should be testable.
-
-## Current Status
-
-Project stage:
+Current Version
 
 ```text
-v0.1 — Architecture and File Identity Engine
+v0.1
 ```
 
-Current focus:
+Current Development Stage
 
-* Repository structure
-* Documentation foundation
-* File hashing
+* File Intake
+* File Type Detection
+* Hash Engine
+* Sample Model
+
+Current Focus
+
+Building the core analysis pipeline before implementing advanced detection capabilities.
+
+---
+
+# High-Level Architecture
+
+```text
+CLI
+ │
+ ▼
+File Intake
+ │
+ ▼
+File Type Detection
+ │
+ ▼
+Hash Engine
+ │
+ ▼
+Sample Model
+ │
+ ▼
+Metadata Engine
+ │
+ ▼
+Format Analysis
+ ├── PE
+ ├── ELF
+ └── Mach-O
+ │
+ ▼
+Static Analysis
+ ├── Strings
+ ├── Entropy
+ ├── Sections
+ ├── Imports
+ └── Symbols
+ │
+ ▼
+IOC Extraction
+ │
+ ▼
+Detection Layer
+ ├── Suspicious Indicators
+ ├── Packer Detection
+ ├── YARA Matching
+ ├── Sigma Mapping
+ └── Blackwell Signatures
+ │
+ ▼
+Threat Intelligence
+ ├── MITRE ATT&CK Mapping
+ └── Threat Context
+ │
+ ▼
+Threat Scoring
+ ├── Threat Score
+ ├── Confidence Score
+ └── Investigation Priority
+ │
+ ▼
+Reporting
+ ├── JSON
+ ├── HTML Dashboard
+ ├── Analyst Summary
+ └── Case Bundle
+```
+
+---
+
+# Supported Executable Formats
+
+Current Targets
+
+* Portable Executable (PE)
+* Executable and Linkable Format (ELF)
+* Mach-O
+
+Future support may include additional executable and firmware formats.
+
+---
+
+# Core Capabilities
+
+Current and planned capabilities include:
+
+* Secure file intake validation
+* Executable format detection
+* Cryptographic hashing
 * Metadata extraction
-* JSON report schema
+* Section analysis
+* Import analysis
+* Export analysis
+* String extraction
+* Entropy analysis
+* Packer detection
+* IOC extraction
+* YARA matching
+* Sigma mapping
+* MITRE ATT&CK mapping
+* Explainable threat scoring
+* Confidence scoring
+* Investigation priority assessment
+* JSON reporting
+* HTML dashboard
+* Case bundle generation
+* Sandbox integration
 
-## Safety Notice
+---
 
-This repository does not distribute malware samples.
+# Repository Structure
 
-Any malware analysis should be performed only in a controlled, isolated, and legally authorized environment.
+```text
+binarytriage/
+    core/
+    formats/
+    detection/
+    intel/
+    models/
+    scoring/
+    reporting/
+    integrations/
 
-Do not execute unknown binaries on a host machine.
+config/
+docs/
+rules/
+schemas/
+templates/
+tests/
+datasets/
+examples/
+samples/
+```
 
-## Roadmap
+---
 
-| Version | Goal                                        |
-| ------- | ------------------------------------------- |
-| v0.1    | Architecture, repository structure, hashing |
-| v0.2    | Metadata, entropy, strings                  |
-| v0.3    | PE static analysis                          |
-| v0.4    | ELF static analysis                         |
-| v0.5    | Suspicious indicators                       |
-| v0.6    | Explainable scoring engine                  |
-| v0.7    | JSON reporting                              |
-| v0.8    | Evaluation framework                        |
-| v0.9    | Analyst-ready CLI                           |
-| v1.0    | Stable static triage release                |
+# Development Workflow
 
-## License
+Every BinaryTriage-X module follows the same engineering lifecycle.
 
-To be determined.
+```text
+Research
+        │
+        ▼
+Architecture
+        │
+        ▼
+Implementation
+        │
+        ▼
+Unit Testing
+        │
+        ▼
+Documentation
+        │
+        ▼
+Review
+        │
+        ▼
+Integration
+```
+
+---
+
+# Engineering Principles
+
+Every module must satisfy the following requirements.
+
+* Clearly defined responsibility.
+* Single-purpose implementation.
+* Unit tests.
+* Complete documentation.
+* Explainable behavior.
+* Reproducible output.
+* Secure default behavior.
+* Extensible design.
+
+---
+
+# Detection Philosophy
+
+BinaryTriage-X does **not** attempt to declare whether a file is malware.
+
+Instead, it evaluates observable characteristics and produces an explainable investigation priority based on collected evidence.
+
+Every score must include supporting findings.
+
+Every finding must include supporting evidence.
+
+---
+
+# Safety Policy
+
+BinaryTriage-X performs static analysis only.
+
+The project does not:
+
+* execute unknown binaries
+* bypass security controls
+* distribute malware
+* exploit systems
+* perform offensive actions
+
+Any malware research should only be conducted within isolated and legally authorized environments.
+
+---
+
+# Documentation
+
+Project documentation is located in the `docs/` directory.
+
+Documentation includes:
+
+* Architecture
+* System Pipeline
+* Threat Model
+* Module Index
+* Architecture Decisions
+* Coding Standards
+* Glossary
+* Dataset Policy
+* Detection Engine
+* MITRE Mapping
+* Dashboard Design
+* Evaluation Methodology
+
+---
+
+# Roadmap
+
+## Core Platform
+
+* File Intake
+* File Type Detection
+* Hash Engine
+* Sample Model
+* Metadata Engine
+
+## Static Analysis
+
+* Strings
+* Entropy
+* Sections
+* Imports
+* Symbols
+
+## Detection
+
+* Suspicious Indicators
+* Packer Detection
+* YARA
+* Sigma
+* Blackwell Signatures
+
+## Threat Intelligence
+
+* IOC Extraction
+* MITRE ATT&CK Mapping
+* Threat Context
+
+## Reporting
+
+* JSON Reports
+* HTML Dashboard
+* Case Bundles
+
+## Integration
+
+* VirusTotal
+* Sandbox Support
+* Future REST API
+* Plugin System
+
+---
+
+# Long-Term Vision
+
+BinaryTriage-X aims to become a modular binary triage platform capable of supporting professional malware analysis workflows through explainable analysis, structured evidence collection, and reproducible engineering practices.
+
+The project prioritizes architecture quality, documentation, testing, and long-term maintainability over rapid feature accumulation.
+
+---
+
+# License
+
+License information will be defined before the first public release.
