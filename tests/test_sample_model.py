@@ -22,7 +22,7 @@ def test_sample_to_dict():
     result = sample.to_dict()
 
     assert result["path"] == "sample.exe"
-    assert result["filename"] == "sample.exe"
+    assert result["file_name"] == "sample.exe"
     assert result["file_type"] == "PE"
     assert result["hashes"]["sha256"] == "abc123"
 
