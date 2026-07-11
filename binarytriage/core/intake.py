@@ -6,7 +6,7 @@ class FileIntakeError(Exception):
     pass
 
 
-DEFAULT_MAX_FILE_SIZE = 100 * 1024 * 1024
+DEFAULT_MAX_FILE_SIZE = 100 * 1024 * 1024 #100MB 
 
 
 def validate_input_file(file_path: str, max_size: int = DEFAULT_MAX_FILE_SIZE) -> Path:
