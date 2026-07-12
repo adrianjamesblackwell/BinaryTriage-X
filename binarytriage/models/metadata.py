@@ -28,7 +28,7 @@ class FileMetadata:
         Convert the metadata model into a JSON-serializable dictionary.
 
         Returns:
-            Dictionary containing all metadata fields.
+            A dictionary containing all metadata fields.
         """
         return {
             "file_name": self.file_name,
