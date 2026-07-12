@@ -1,20 +1,28 @@
-# Samples Policy
+cat > samples/README.md <<'EOF'
+# Local Samples Policy
 
-This directory is reserved for safe test fixtures only.
+This directory is reserved for local analysis workflows.
 
-This repository must not contain live malware samples.
+Live malware samples must never be committed to this repository.
 
-Allowed content:
+## Permitted Local Content
 
-- benign test files
-- synthetic text fixtures
-- hashes
-- metadata examples
-- documentation samples
+- legally obtained analysis samples
+- benign executable fixtures
+- private research artifacts
+- temporary files used during isolated analysis
 
-Disallowed content:
+## Prohibited Repository Content
 
 - live malware
 - weaponized binaries
-- stolen files
 - unauthorized samples
+- stolen files
+- credentials
+- private customer data
+- restricted or improperly licensed datasets
+
+All unknown or malicious samples must be handled only inside controlled, isolated, and legally authorized environments.
+
+The contents of this directory are ignored by Git except for this policy document.
+EOF
